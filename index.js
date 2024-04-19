@@ -21,24 +21,20 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-  //Get Navigation Sidebar element by its ID
   navigationSidebar: document.getElementById("side-bar-div"),
-
-  //Get Button element by its ID
   button: document.getElementById("show-side-bar-btn"),
-  
-  //Get Main Layout by its ID
   mainLayout: document.getElementById("layout"),
-
-  //Get the form by its ID
   formForAddingNewTask: document.getElementById("new-task-modal-window"),
-
-  //Get Edit Task Modal by its ID
-  editTaskModal: document.getElementById("edit-task-modal-window"),
-
-  //Get Filter Div by its ID
-  filterDiv: document.getElementById("filterDiv")
-
+  editTaskModal: document.querySelector(".edit-task-modal-window"),
+  filterDiv: document.getElementById("filterDiv"),
+  headerBoardName: document.getElementById("header-board-name"),
+  createNewTaskBtn: document.getElementById("add-new-task-btn"),
+  saveTaskChangesBtn: document.getElementById("save-task-changes-btn"),
+  cancelEditBtn: document.getElementById("cancel-edit-btn"),
+  deleteTaskBtn: document.getElementById("delete-task-btn"),
+  themeSwitch: document.getElementById("switch"),
+  hideSideBarBtn: document.getElementById("hide-side-bar-btn"),
+  showSideBarBtn: document.getElementById("show-side-bar-btn"),
 }
 
 let activeBoard = ""
@@ -154,7 +150,7 @@ function addTaskToUI(task) {
   taskElement.textContent = task.title; // Modify as needed
   taskElement.setAttribute('data-task-id', task.id);
   
-  tasksContainer.appendChild(); 
+  tasksContainer.appendChild(taskElement); 
 }
 
 
@@ -210,12 +206,17 @@ function addTask(event) {
   event.preventDefault(); 
 
   //Assign user input to the task object
-    const task = {
-      title: title,
-      description: description,
-      status: status
-    };
-    const newTask = createNewTask(task);
+  const title = document.getElementById("title-input").value;
+  const description = document.getElementById("desc-input").value;
+  const status = document.getElementById("select-status").value;
+
+  const task = {
+     title: title,
+     description: description,
+     status: status
+  };
+    
+  const newTask = createNewTask(task);
     if (newTask) {
       addTaskToUI(newTask);
       toggleModal(false);
@@ -228,9 +229,9 @@ function addTask(event) {
 
 function toggleSidebar(show) {
   if (show) {
-    navigationSidebar.classList.add('show');
+    elements.navigationSidebar.classList.add('show');
   } else {
-    navigationSidebar.classList.remove('show');
+    elements.navigationSidebar.classList.remove('show');
   }
 }
 
