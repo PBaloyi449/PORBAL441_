@@ -193,6 +193,18 @@ function setupEventListeners() {
   elements.modalWindow.addEventListener('submit',  (event) => {
     addTask(event);
   });
+
+  // Event listener for clicking on a task to view its details
+  document.addEventListener('click', (event) => {
+    const taskElement = event.target.closest('.task-div');
+    if (taskElement) {
+      const taskId = taskElement.getAttribute('data-task-id');
+      const task = getTaskById(taskId); // Implement a function to get task details by ID
+      if (task) {
+        openEditTaskModal(task);
+      }
+    }
+  });
 }
 
 // Toggles tasks modal
